@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ESNEXT",
+    "module": "commonjs",
+    "resolveJsonModule": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "typeRoots": [
+        "./node_modules/@types",
+        "./typings"
+    ],
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
+  }
+}

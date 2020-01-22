@@ -1,0 +1,9 @@
+--timeout 50000
+--reporter mocha-junit-reporter
+--reporter spec
+--require ts-node/register
+--require source-map-support/register
+--require ./src/tests/testUtils/testInitialize.testUtil.ts
+--recursive
+./src/**/*.test.ts
+--exit
