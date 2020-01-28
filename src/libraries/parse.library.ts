@@ -27,7 +27,7 @@ function validate(input: string) {
     if (!isString(input) || isStringWithSpaces(input)) {
         return (
             'Please enter a non-empty string\n' +
-            'Type EXIT to exit\n'
+            '>> Type EXIT to exit\n'
         )
     }
 

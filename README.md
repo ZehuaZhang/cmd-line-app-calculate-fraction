@@ -1,5 +1,5 @@
 # Interview Freetime
-Calculate fraction
+Calculate fraction with both exhaustive error checking and maximum input tolerance
 
 # How to
 
