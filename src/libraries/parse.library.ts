@@ -3,6 +3,7 @@ import { isString } from '../utils/object.util'
 import { isStringWithSpaces, getTrimmedString } from '../utils/string.util'
 import { I_OpList } from '../interfaces/op.interface'
 import { getFormalizedFraction } from '../utils/algorithms/calculator.util'
+import { EXIT } from '../utils/constants.util'
 
 let opList: I_OpList
 
@@ -12,7 +13,8 @@ export function parseUserInputsFromCLI() {
             name: 'calculation',
             type: 'input',
             message: 'Enter Calculation:',
-            validate: (value: string) => validate(value)
+            validate: (value: string) => validate(value),
+            transformer: (value: string) => value.trimLeft()
         }
     ]
 
@@ -23,7 +25,14 @@ function validate(input: string) {
     opList = [] as any
 
     if (!isString(input) || isStringWithSpaces(input)) {
-        return 'Please enter a non-empty string'
+        return (
+            'Please enter a non-empty string\n' +
+            'Type EXIT to exit\n'
+        )
+    }
+
+    if (input.toUpperCase() === EXIT) {
+        return true
     }
 
     const inputList = input.split(' ')
@@ -48,12 +57,12 @@ function validate(input: string) {
             let fractionText = null
             const numberList = op.split('_').filter(number => number)
             if (numberList.length === 1) {
-                if (op.startsWith('_')) {
+                if (op.startsWith('_') || op.includes('/')) {
                     integerText = '0'
                     fractionText = numberList[0]
                 } else {
                     integerText = numberList[0]
-                    fractionText = '1/1'
+                    fractionText = '0/1'
                 }
             } else {
                 integerText = numberList[0]
@@ -65,11 +74,9 @@ function validate(input: string) {
             }
 
             const integer = integerText ? parseInt(integerText) : NaN
-            if (!isString(integerText) && !isNaN(integer) && integer.toString() !== integerText) {
+            if (!isString(integerText) || isNaN(integer) || integer.toString() !== integerText) {
                 return error.message = `Invalid integer for operand ${op}`
             }
-
-            console.log(integerText, integer)
 
             const [numeratorText, denominatorText] = fractionText && fractionText.split('/') || [null, null]
             const [numerator, denominator] = [numeratorText, denominatorText].map(text => parseInt(text as string))
