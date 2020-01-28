@@ -1,7 +1,7 @@
 import { createSandbox } from 'sinon'
 import { expect } from 'chai'
 import { SinonSandbox } from 'sinon'
-import { getFreeTimeListFromSchedules } from '../../algorithms/schedule.algorithms'
+import { getFreeTimeListFromSchedules } from '../../algorithms/calculator.algorithms'
 
 describe('shedule algorithm', () => {
   let sandbox: SinonSandbox

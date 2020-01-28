@@ -7,3 +7,7 @@ export function getTrimmedString(text: string) {
 
     return text.trim()
 }
+
+export function isStringWithSpaces(text: string) {
+    return !getTrimmedString(text)
+}
